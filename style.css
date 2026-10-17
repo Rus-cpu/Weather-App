@@ -1,0 +1,73 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+:root {
+    --bg: #F5F8FA;
+    --font-color-1: #233D50;
+    --semi-bold: 600;
+    --white: #FFFFFF;
+    --light-text: #738794;
+
+}
+
+body {
+    background-color: var(--bg);
+    height: 100vh;
+    
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+
+}
+
+.container .container-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: auto;
+    background-color: #FFFFFF;
+    padding: 20px;
+
+}
+
+#logo-text {
+    font-size: 25px;
+    font-weight: var(--semi-bold);
+    color: var(--font-color-1);
+}
+
+.container .container-wrapper .logo-wrapper {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+}
+
+.container .container-wrapper .nav-items {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    align-items: center;
+    color: var(--font-color-1);
+}
+
+.container .container-wrapper .nav-items li a {
+    color: var(--font-color-1);
+}
+
+.container .container-wrapper .nav-items .left {
+    color: var(--light-text);
+    font-weight: 250;
+}
