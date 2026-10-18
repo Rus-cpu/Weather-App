@@ -109,17 +109,53 @@ input[type="text"] {
 
 .container .container-wrapper .searchbar .temp-wrapper {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     gap: 25px;
     background-color: var(--nav-secondary);
-    padding: 6px 10px;
+    padding: 5px 10px;
     border-radius: 8px;
 }
 
 .container .container-wrapper .searchbar .temp-wrapper .selected-temp {
     background-color: var(--white);
-    padding: 4px 10px;
+    padding: 6px 10px;
     border-radius: 6px;
 }
 
+main .sec1 .sec1-wrapper {
+    margin: 36px 64px;
+}
+
+main .sec1 .sec1-wrapper .data {
+    display: flex;
+    justify-content: space-between;
+}
+
+main .sec1 .sec1-wrapper .data .place p {
+    font-size: 12px;
+    color: var(--light-text);
+    font-weight: 250;
+    position: relative;
+}
+
+main .sec1 .sec1-wrapper .data .place h2 {
+    position: absolute;
+    margin: 8px;
+    color: var(--font-color-1);
+    font-size: 36px;
+    font-family: "Inter";
+}
+
+main .sec1 .sec1-wrapper .data .date-time {
+    color: var(--font-color-1);
+    font-size: 14px;
+}
+
+main .sec1 .sec1-wrapper .data .date-time ul {
+    list-style: disc;
+    margin-top: 8px;
+    color: var(--light-text);
+    font-weight: 250;
+    font-size: 12px;
+}
