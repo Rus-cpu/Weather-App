@@ -1,45 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="this is the weather app where you can see the weather of today as well as the predicated weather of future">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="this is the weather app where you can see the weather of today as well as the predicated weather of future"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+      integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Weather App</title>
-    <link href="./style.css" rel="stylesheet"/>
-</head>
-<body>
+    <link href="./style.css" rel="stylesheet" />
+  </head>
+  <body>
     <header class="header">
-        <div class="container">
-            <div class="container-wrapper">
-                <div class="logo">
-                    <a href="#" class="logo-wrapper">
-                        <img src="./img/Daylight monogram — sunrise & horizon.png"  alt="logo of the page" > <h4 id="logo-text">daylight</h4>
-                    </a>
-                </div>
-                <ul class="nav-items">
-                    <li id="used-nav"><a href="#">Overview</a></li>
-                    <li class="left"><a href="#">Weather maps</a></li>
-                    <li class="left"><a href="#">Saved places</a></li>
-                </ul>
-                <div class="searchbar">
-                    <div class="searchbar-wrapper">
-
-                    </div>
-                    <div class="temp-wrapper">
-                        
-                    </div>
-                </div>
+      <div class="container">
+        <div class="container-wrapper">
+          <div class="logo">
+            <a href="#" class="logo-wrapper">
+              <img
+                src="./img/Daylight monogram — sunrise & horizon.png"
+                alt="logo of the page"
+              />
+              <h4 id="logo-text">daylight</h4>
+            </a>
+          </div>
+          <ul class="nav-items">
+            <li id="used-nav"><a href="#">Overview</a></li>
+            <li class="left"><a href="#">Weather maps</a></li>
+            <li class="left"><a href="#">Saved places</a></li>
+          </ul>
+          <div class="searchbar">
+            <div class="searchbar-wrapper">
+              <div class="searchbar-search">
+                <button class="fa-solid fa-magnifying-glass"></button>
+                <input
+                  type="text"
+                  name="search-bar-txt"
+                  id="search-bar-txt"
+                  placeholder="Search for a city"
+                />
+                <img class="searchbar-k" src="./img/Keyboard shortcut.png" alt="search-bar-logo"/>
+              </div>
             </div>
+            <div class="temp-wrapper">
+              <a href="#"><img src="./img/Unit.png" alt="celsius-logo"></a>
+              <a href="#"><img src="./img/Unit (1).png" alt="fahrenheit-logo"></a>
+            </div>
+          </div>
         </div>
-
+      </div>
     </header>
-    <main>
-        
-    </main>
-    <footer>
-
-    </footer>
+    <main></main>
+    <footer></footer>
 
     <script src="./script.js"></script>
-</body>
+  </body>
 </html>

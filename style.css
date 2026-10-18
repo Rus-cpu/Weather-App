@@ -14,6 +14,7 @@
     --white: #FFFFFF;
     --light-text: #738794;
     --yellow: #EFBF57;
+    --nav-secondary: #F5F8FA;
 
 }
 
@@ -53,6 +54,7 @@ ul {
     justify-content: start;
     align-items: start;
     gap: 10px;
+    margin-top: 5px;
 }
 
 .container .container-wrapper .nav-items {
@@ -62,7 +64,7 @@ ul {
     gap: 32px;
     align-items: center;
     color: var(--font-color-1);
-    padding-top: 5px;
+    padding-top: 12px;
 }
 
 .container .container-wrapper .nav-items li a {
@@ -77,3 +79,41 @@ ul {
 .container .container-wrapper .nav-items #used-nav {
     text-decoration: underline 3px var(--yellow);
 }
+
+
+.container .container-wrapper .searchbar .searchbar-wrapper {
+    background-color: var(--nav-secondary);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+input[type="text"] {
+    border: none;
+    background-color: var(--nav-secondary);
+    font-weight: 250;
+    color: var(--light-text);
+}
+
+.container .container-wrapper .searchbar .searchbar-wrapper button {
+    background: transparent;
+    border: none;
+    color: var(--light-text);
+}
+
+.container .container-wrapper .searchbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.container .container-wrapper .searchbar .temp-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    background-color: var(--nav-secondary);
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+
