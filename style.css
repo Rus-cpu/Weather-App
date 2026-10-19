@@ -15,6 +15,7 @@
     --light-text: #738794;
     --yellow: #EFBF57;
     --nav-secondary: #F5F8FA;
+    --bg-secondary: #E8F2F8;
 
 }
 
@@ -31,6 +32,11 @@ a {
 ul {
     list-style: none;
 
+}
+
+p {
+     font-size: 14px;
+    color: var(--light-text);
 }
 
 .container .container-wrapper {
@@ -123,8 +129,9 @@ input[type="text"] {
     border-radius: 6px;
 }
 
-main .sec1 .sec1-wrapper {
+ main { 
     margin: 36px 64px;
+    position: relative;
 }
 
 main .sec1 .sec1-wrapper .data {
@@ -136,11 +143,9 @@ main .sec1 .sec1-wrapper .data .place p {
     font-size: 12px;
     color: var(--light-text);
     font-weight: 250;
-    position: relative;
 }
 
-main .sec1 .sec1-wrapper .data .place h2 {
-    position: absolute;
+main .sec1 .sec1-wrapper .data .place h2 { 
     margin: 8px;
     color: var(--font-color-1);
     font-size: 36px;
@@ -158,4 +163,102 @@ main .sec1 .sec1-wrapper .data .date-time ul {
     color: var(--light-text);
     font-weight: 250;
     font-size: 12px;
+}
+
+main .sec1 .sec1-wrapper .sec1-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative;
+    
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-left {
+    margin-top: 24px;
+    width: 70%;
+    background-color: var(--bg-secondary);
+    padding: 40px;
+    border-radius: 20px;
+}
+main .sec1 .sec1-wrapper .sec1-main .sec1-left .left-data {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-left 
+.left-data .img {
+    display: flex;
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-left .left-data .normal {
+    font-size: 14px;
+    color: var(--font-color-1);
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-left .left-data .big{
+    font-size: 100px;
+    color: var(--font-color-1);
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-left 
+.left-data .img {
+    gap: 5px;
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-left 
+.left-data .img .space  p{
+    line-height: 20px;
+    margin-top: 8px;
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-left 
+.left-data .img h3 {
+    margin-top: 30px;
+    color: var(--font-color-1);
+    font-weight: var(--semi-bold);
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-right .img{
+    position: relative;
+    background: url(./img/istockphoto-637696304-612x612.jpg) no-repeat center center/cover;
+    width: 380px;
+    height: 280px;
+    margin-top: 30px;
+    border-radius: 15px;
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-right .img .top {
+    position: absolute;
+    display: inline;
+    display: flex;
+    gap: 5px;
+    padding: 4px;
+    background-color: var(--white);
+    border-radius: 10px;
+    margin: 20px;
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-right .img .top .fix {
+    font-size: 11px;
+    color: black;
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-right .img .btm {
+    position: absolute;
+    bottom: 0;
+    margin: 20px;
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-right .img .btm h3 {
+    font-size: 25px;
+    color: var(--white);
+    margin-bottom: 8px;
+}
+
+main .sec1 .sec1-wrapper .sec1-main .sec1-right .img .btm p {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 20px;
 }
