@@ -22,7 +22,7 @@
 body {
     background-color: var(--bg);
     height: 100vh;
-    
+    position: relative;
 }
 
 a {
@@ -261,4 +261,43 @@ main .sec1 .sec1-wrapper .sec1-main .sec1-right .img .btm p {
     font-size: 13px;
     color: var(--white);
     line-height: 20px;
+}
+
+
+
+footer .footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+    padding: 25px 60px;
+    box-shadow: 0px -4px 4px #E3EBEF;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+footer .footer-wrapper .left h4 {
+margin-bottom: 4px;
+color: var(--font-color-1);
+font-size: 15px;
+}
+
+footer .footer-wrapper .left p {
+    font-size: 11px;
+}
+
+footer .footer-wrapper .right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    font-size: 12px;
+}
+
+footer .footer-wrapper .mid ul {
+    list-style: disc;
+    color: var(--light-text);
 }
