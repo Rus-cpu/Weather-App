@@ -316,6 +316,25 @@ main .sec2 .sec2-wrapper .forecast .same h2{
     font-size: 18px;
     padding-top: 10px;
 }
+/* third segment of main */
+main .sec3 {
+    margin-top: 28px;
+}
+
+main .sec3 .sec3-wrapper {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    
+}
+
+main .sec3 .sec3-wrapper .s3 {
+    background-color: var(--white);
+    padding: 20px 0 0 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px 5px #E3EBEF;
+}
 
 /* footer segment */
 footer .footer-wrapper {
@@ -354,3 +373,4 @@ footer .footer-wrapper .mid ul {
     list-style: disc;
     color: var(--light-text);
 }
+
