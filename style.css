@@ -331,9 +331,49 @@ main .sec3 .sec3-wrapper {
 
 main .sec3 .sec3-wrapper .s3 {
     background-color: var(--white);
-    padding: 20px 0 0 20px;
+    padding: 20px 0 20px 20px;
     border-radius: 12px;
     box-shadow: 0 0 10px 5px #E3EBEF;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: start;
+}
+
+
+main .sec3 .sec3-wrapper .s3 .s3-1 {
+    display: flex;
+    gap: 5px;
+}
+
+main .sec3 .sec3-wrapper .s3 .s3-2 {
+    display: flex;
+    padding-top: 10px;
+    align-items: center;
+    gap: 5px;
+}
+
+main .sec3 .sec3-wrapper .s3 .tl {
+    display: flex;
+    /* */
+    align-items: center;
+    gap: 5px;
+}
+
+
+main .sec3 .sec3-wrapper .top-right #tr {
+    margin-top: 20px;
+}
+
+main .sec3 .sec3-wrapper .bottom-right .br {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 150px;
+}
+
+main .sec3 .sec3-wrapper .bottom-left .bl {
+    padding-top: 30px;
 }
 
 /* footer segment */
