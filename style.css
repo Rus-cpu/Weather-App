@@ -309,7 +309,7 @@ main .sec2 .sec2-wrapper .forecast .same {
 main .sec2 .sec2-wrapper .forecast .same img {
    width: 38px;
    height: 38px;
-   margin-top: 10px;
+   margin-top: 20px;
 }
 
 main .sec2 .sec2-wrapper .forecast .same h2{
@@ -414,3 +414,67 @@ footer .footer-wrapper .mid ul {
     color: var(--light-text);
 }
 
+@media (max-width: 1400px) {
+    .container-wrapper {
+       width: calc(100% - 100px);
+    }
+
+    footer .footer-wrapper {
+       width: calc(100% - 100px);
+    }
+
+    .forecast {
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+
+    .forecast .same {
+        width: calc(100% / 3 - 15px);
+        margin-top: 20px;
+    }
+
+    .sec1-wrapper .data {
+        width: calc(100% - 110px);
+    }
+
+    .sec1-wrapper .sec1-main {
+        width: calc(100% - 100px);
+        /* flex-wrap: wrap; */
+    }
+
+    .sec1-wrapper .sec1-main .left-data {
+        width: calc(100% - 60%);
+    }
+
+    .sec1-wrapper .sec1-main .sec1-right {
+        /* width: calc(100% - 100px);
+        height: calc(100% - 100px); */
+    }
+
+    .sec2-wrapper {
+        width: calc(100% - 100px);
+    }
+
+    .sec3-wrapper {
+        width: calc(100% - 100px);
+    }
+}
+
+@media (max-width: 1200px) {
+     .forecast .same {
+        width: calc(100% / 3 - 15px);
+    }
+    .sec1-wrapper .sec1-main {
+        flex-wrap: wrap;
+    }
+    main .sec1 .sec1-wrapper .sec1-main .left-data {
+        width: 100%;
+        
+    }
+}
+
+@media (max-width: 950px) {
+    .forecast .same {
+        width: calc(100% / 2 - 10px);
+    }
+}
