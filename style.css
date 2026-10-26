@@ -414,67 +414,422 @@ footer .footer-wrapper .mid ul {
     color: var(--light-text);
 }
 
-@media (max-width: 1400px) {
-    .container-wrapper {
-       width: calc(100% - 100px);
+
+@media screen and (max-width: 1024px) {
+    body {
+        height: auto;
+        min-height: 100vh;
     }
 
-    footer .footer-wrapper {
-       width: calc(100% - 100px);
+    main {
+        margin: 30px 30px;
     }
 
-    .forecast {
+    .container .container-wrapper {
         flex-wrap: wrap;
-        justify-content: start;
+        align-items: center;
+        gap: 20px; 
     }
 
-    .forecast .same {
-        width: calc(100% / 3 - 15px);
+    .container .container-wrapper .nav-items {
+        gap: 20px;
+    }
+
+    .container .container-wrapper .searchbar {
+        width: 100%;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .searchbar-wrapper {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .searchbar-search {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    input[type="text"] {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .searchbar-k {
+        max-width: 22px;
+    }
+
+    /* current weather section */
+    main .sec1 .sec1-wrapper .sec1-main {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left {
+        width: 100%;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-right .img {
+        width: 100%;
+        height: 300px;
         margin-top: 20px;
     }
 
-    .sec1-wrapper .data {
-        width: calc(100% - 110px);
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left .left-data {
+        gap: 20px;
     }
 
-    .sec1-wrapper .sec1-main {
-        width: calc(100% - 100px);
-        /* flex-wrap: wrap; */
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left .left-data .big {
+        font-size: 80px;
     }
 
-    .sec1-wrapper .sec1-main .left-data {
-        width: calc(100% - 60%);
+    /* Seven-day forecast */
+    main .sec2 .sec2-wrapper .forecast {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 15px;
     }
 
-    .sec1-wrapper .sec1-main .sec1-right {
-        /* width: calc(100% - 100px);
-        height: calc(100% - 100px); */
+    main .sec2 .sec2-wrapper .forecast .same {
+        padding: 15px 10px;
+        min-width: 0;
     }
 
-    .sec2-wrapper {
-        width: calc(100% - 100px);
+    /* Today's highlights */
+    main .sec3 .sec3-wrapper {
+        gap: 20px;
     }
 
-    .sec3-wrapper {
-        width: calc(100% - 100px);
+    main .sec3 .sec3-wrapper .s3 {
+        padding: 20px;
+        min-width: 0;
     }
-}
 
-@media (max-width: 1200px) {
-     .forecast .same {
-        width: calc(100% / 3 - 15px);
-    }
-    .sec1-wrapper .sec1-main {
+    main .sec3 .sec3-wrapper .bottom-right .br {
+        gap: 30px;
         flex-wrap: wrap;
     }
-    main .sec1 .sec1-wrapper .sec1-main .left-data {
-        width: 100%;
-        
+
+    main .sec3 .sec3-wrapper img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Footer */
+    footer .footer-wrapper {
+        position: static;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px 30px;
     }
 }
 
-@media (max-width: 950px) {
-    .forecast .same {
-        width: calc(100% / 2 - 10px);
+
+
+
+@media screen and (max-width: 768px) {
+
+    main {
+        margin: 24px 18px;
+    }
+
+    /* Header */
+    .container .container-wrapper {
+        padding: 16px;
+        gap: 18px;
+    }
+
+    #logo-text {
+        font-size: 22px;
+    }
+
+    .container .container-wrapper .logo-wrapper {
+        align-items: center;
+        gap: 8px;
+    }
+
+    .container .container-wrapper .logo-wrapper img {
+        max-width: 40px;
+        height: auto;
+    }
+
+    .container .container-wrapper .nav-items {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+        padding-top: 0;
+        font-size: 12px;
+    }
+
+    .container .container-wrapper .nav-items li a {
+        white-space: nowrap;
+    }
+
+    .container .container-wrapper .searchbar {
+        gap: 10px;
+    }
+
+    .container .container-wrapper .searchbar .searchbar-wrapper {
+        padding: 10px;
+    }
+
+    .container .container-wrapper .searchbar .temp-wrapper {
+        gap: 8px;
+        padding: 5px;
+    }
+
+    .container .container-wrapper .searchbar .temp-wrapper a img {
+        max-width: 24px;
+        height: auto;
+    }
+
+    .container .container-wrapper .searchbar .temp-wrapper .selected-temp {
+        padding: 5px;
+    }
+
+    /* Location and date */
+    main .sec1 .sec1-wrapper .data {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    main .sec1 .sec1-wrapper .data .place h2 {
+        font-size: 30px;
+        margin: 8px 0;
+    }
+
+    main .sec1 .sec1-wrapper .data .date-time {
+        font-size: 13px;
+    }
+
+    /* Current weather card */
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left {
+        padding: 22px;
+        margin-top: 20px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left .left-data {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left .left-data .big {
+        font-size: 76px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left
+    .left-data .img {
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left
+    .left-data .img img {
+        max-width: 90px;
+        height: auto;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left
+    .left-data .img h3 {
+        margin-top: 0;
+        font-size: 18px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left
+    .left-data .img .space p {
+        line-height: 1.6;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left .bottom-info {
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    /* Day-ahead card */
+    main .sec1 .sec1-wrapper .sec1-main .sec1-right .img {
+        height: 260px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-right .img .btm h3 {
+        font-size: 21px;
+    }
+
+    /* Seven-day forecast */
+    main .sec2 .sec2-wrapper {
+        padding: 20px;
+        margin-top: 30px;
+    }
+
+    main .sec2 .sec2-wrapper .forecast {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    main .sec2 .sec2-wrapper .forecast .same {
+        padding: 14px 8px;
+    }
+
+    main .sec2 .sec2-wrapper .forecast .same img {
+        width: 34px;
+        height: 34px;
+        margin-top: 12px;
+    }
+
+    /* Today's highlights */
+    main .sec3 {
+        margin-top: 26px;
+    }
+
+    main .sec3 h1 {
+        font-size: 25px;
+    }
+
+    main .sec3 .sec3-wrapper {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    main .sec3 .sec3-wrapper .s3 {
+        padding: 20px;
+        gap: 16px;
+    }
+
+    main .sec3 .sec3-wrapper .s3 .s3-2 h2 {
+        font-size: 28px;
+    }
+
+    main .sec3 .sec3-wrapper .bottom-right .br {
+        width: 100%;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    main .sec3 .sec3-wrapper .bottom-left .bl {
+        padding-top: 10px;
+    }
+
+    /* Footer */
+    footer .footer-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding: 22px 18px;
+    }
+
+    footer .footer-wrapper .right {
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+
+    main {
+        margin: 20px 12px;
+    }
+
+    /* Header */
+    .container .container-wrapper {
+        padding: 14px 12px;
+        gap: 16px;
+    }
+
+    .container .container-wrapper .nav-items {
+        gap: 8px;
+        font-size: 11px;
+    }
+
+    .container .container-wrapper .searchbar {
+        flex-wrap: wrap;
+    }
+
+    .container .container-wrapper .searchbar .searchbar-wrapper {
+        flex: 1 1 100%;
+    }
+
+    .container .container-wrapper .searchbar .temp-wrapper {
+        margin-left: auto;
+    }
+
+    .searchbar-k {
+        display: none;
+    }
+
+    /* Location and current weather */
+    main .sec1 .sec1-wrapper .data .place h2 {
+        font-size: 27px;
+    }
+
+    main .sec1 .sec1-wrapper .data .date-time ul {
+        font-size: 11px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left {
+        padding: 18px;
+        border-radius: 16px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left .left-data .big {
+        font-size: 64px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-left .bottom-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-right .img {
+        height: 230px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-right .img .btm {
+        margin: 14px;
+    }
+
+    main .sec1 .sec1-wrapper .sec1-main .sec1-right .img .btm h3 {
+        font-size: 19px;
+    }
+
+    /* Forecast: two columns */
+    main .sec2 .sec2-wrapper {
+        padding: 16px;
+    }
+
+    main .sec2 .sec2-wrapper .forecast {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    main .sec2 .sec2-wrapper .forecast .same {
+        padding: 14px 6px;
+    }
+
+    main .sec2 .sec2-wrapper .forecast .same img {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* Highlights */
+    main .sec3 h1 {
+        font-size: 22px;
+    }
+
+    main .sec3 .sec3-wrapper .s3 {
+        padding: 16px;
+    }
+
+    main .sec3 .sec3-wrapper .bottom-right > img {
+        width: 100%;
+    }
+
+    /* Footer */
+    footer .footer-wrapper .right {
+        gap: 14px;
+        font-size: 11px;
     }
 }
