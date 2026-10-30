@@ -7,6 +7,9 @@ const API_KEY = "3b083e17996afb741c42ac6fde0e9bb9"; // API KEY for openweather A
 
 const createWeatherCard = async (cityName, weatherItem, index) => {
     let location = {};
+    const countryNames = new Intl.DisplayNames(["en"], {
+    type: "region"
+    });// this displays the full name of the country
     if (index === 0) {
     const PLACE_API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`;
 
@@ -42,7 +45,7 @@ const createWeatherCard = async (cityName, weatherItem, index) => {
           return `<div class="sec1-wrapper">
             <div class="data">
               <div class="place">
-                <p><i class="fa-solid fa-location-dot"></i>${location.state}, ${location.country}</p>
+                <p><i class="fa-solid fa-location-dot"></i>${location.state}, ${countryNames.of(location.country)}</p>
                 <h2>${cityName}</h2>
               </div>
               <div class="date-time">
@@ -127,59 +130,57 @@ const createWeatherCard = async (cityName, weatherItem, index) => {
 const getWeatherDetails = async (cityName, lat, lon) => {
   const WEATHER_API_URL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
 
-  fetch(WEATHER_API_URL)
-    .then((res) => res.json())
-    .then((data) => {
-      //filter the forecast to get only one forecast per day
-      const uniqueForecastDays = [];
-      const fiveDaysForecast = data.list.filter((forecast) => {
-        const forecastDate = new Date(forecast.dt_txt).getDate();
-        if (!uniqueForecastDays.includes(forecastDate)) {
-          return uniqueForecastDays.push(forecastDate);
-        }
-      });
-      //clearing previous weather data
-      cityInput.value = "";
-      weatherCardsDiv.innerHTML = "";
-      currentWeatherDiv.innerHTML = "";
+  try {
+    const res = await fetch(WEATHER_API_URL);
+    const data = await res.json();
+     //filter the forecast to get only one forecast per day
+  const uniqueForecastDays = [];
+  const fiveDaysForecast = data.list.filter((forecast) => {
+    const forecastDate = new Date(forecast.dt_txt).getDate();
+    if (!uniqueForecastDays.includes(forecastDate)) {
+      return uniqueForecastDays.push(forecastDate);
+    }
+  });
+  //clearing previous weather data
+  cityInput.value = "";
+  weatherCardsDiv.innerHTML = "";
+  currentWeatherDiv.innerHTML = "";
 
-      console.log(fiveDaysForecast);
-      fiveDaysForecast.forEach((weatherItem, index) => {
-        if(index === 0) {
-             currentWeatherDiv.insertAdjacentHTML(
-              "beforeend",
-              await createWeatherCard(cityName, weatherItem, index));
-        }
-        else {
-            weatherCardsDiv.insertAdjacentHTML(
-              "beforeend",
-              createWeatherCard(cityName, weatherItem, index));
-        } 
-      });
-    })
-    .catch(() => {
+  console.log(fiveDaysForecast);
+  fiveDaysForecast.forEach(async (weatherItem, index) => {
+    if(index === 0) {
+         currentWeatherDiv.insertAdjacentHTML(
+          "beforeend",
+          await createWeatherCard(cityName, weatherItem, index));
+    }
+    else {
+        weatherCardsDiv.insertAdjacentHTML(
+          "beforeend",
+          await createWeatherCard(cityName, weatherItem, index));
+    } 
+  });
+  } catch(error) {
       alert("An error occured while fetching the weather forecast!");
-    });
+    };
 };
 
-const getCityCoordinates = () => {
+const getCityCoordinates = async () => {
   const cityName = cityInput.value.trim(); //gets the city name and removes additional spaces
   if (!cityName) {
     return;
   }
   const GEOCODING_API_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`;
 
-  //Helps to get the coordinates (name, latitude, longitude) for the entered city from API response
-  fetch(GEOCODING_API_URL)
-    .then((res) => res.json())
-    .then((data) => {
-      if (!data.length) return alert(`No coordinates found for ${cityName}`);
+  try {
+    const res = await fetch(GEOCODING_API_URL);
+    const data = await res.json();
+    //Helps to get the coordinates (name, latitude, longitude) for the entered city from API response
+     if (!data.length) return alert(`No coordinates found for ${cityName}`);
       const { name, lat, lon } = data[0];
-      getWeatherDetails(name, lat, lon);
-    })
-    .catch(() => {
-      alert("An error occured while fetching the coordinates !");
-    });
+      await getWeatherDetails(name, lat, lon);
+  } catch (error) {
+    alert("An error occured while fetching the coordinates !");
+  }
 };
 
 searchButton.addEventListener("click", getCityCoordinates);
