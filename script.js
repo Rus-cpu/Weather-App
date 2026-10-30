@@ -48,27 +48,7 @@ const createWeatherCard = async (cityName, weatherItem, index) => {
     const countryNames = new Intl.DisplayNames(["en"], {
     type: "region"
     });// this displays the full name of the country
-    const getUVCategory = (uvIndex) => {
-
-    if (uvIndex <= 2) {
-        return "Low";
-    } 
     
-    if (uvIndex <= 5) {
-        return "Moderate";
-    } 
-    
-    if (uvIndex <= 7) {
-        return "High";
-    } 
-    
-    if (uvIndex <= 10) {
-        return "Very High";
-    }
-    return "Extreme";
-  };
-
-  console.log(getUVCategory(4)); 
     if (index === 0) {
     const PLACE_API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`;
 
@@ -204,7 +184,31 @@ const createWeatherCard = async (cityName, weatherItem, index) => {
     }
 };
 
-const createWeatherHighlights = (weatherItem) => {
+const createWeatherHighlights = (weatherItem, sunData) => {
+      if (!sunData) {
+        return "";
+    }
+
+    const getUVCategory = (uvIndex) => {
+
+        if (uvIndex <= 2) return "Low";
+        if (uvIndex <= 5) return "Moderate";
+        if (uvIndex <= 7) return "High";
+        if (uvIndex <= 10) return "Very High";
+
+        return "Extreme";
+    };
+
+    const formatTime = (dateTime) => {
+
+    return new Date(dateTime).toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+    });
+
+};
+
   return ` <div class="sec3">
         <h1>Today's highlights</h1>
         <div class="sec3-wrapper">
@@ -241,8 +245,8 @@ const createWeatherHighlights = (weatherItem) => {
              <p>UV index</p>
             </div>
             <div class="s3-2">
-              <h2>${uvIndex}</h2>
-              <p>${getUVCategory(uvIndex)}</p>
+              <h2>${sunData.uvIndex}</h2>
+              <p>${getUVCategory(sunData.uvIndex)}</p>
             </div>
             <img src="./img/UV scale.png" alt="uv scale" class="bl">
             <p class="bl">A little SPF goes a long way today.</p>
@@ -255,26 +259,30 @@ const createWeatherHighlights = (weatherItem) => {
             <img src="./img/Sun path.png" alt="sunrise">
             <div class="br">
               <div>
-                <p>7:20 AM</p>
+                <p>${formatTime(sunData.sunrise)}</p>
                 <p>Sunrise</p>
               </div>
               <div>
-                <p>6:29 PM</p>
+                <p>${formatTime(sunData.sunset)}</p>
                 <p>Sunset</p>
               </div>
             </div>
-            <p>11 hours, 9 minutes of daylight</p>
+            <p>Hope you have a great day ahead !</p>
           </div>
         </div>
        </div>`;
 };
 
 const getWeatherDetails = async (cityName, lat, lon) => {
-  const WEATHER_API_URL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+  const WEATHER_API_URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
 
   try {
     const res = await fetch(WEATHER_API_URL);
     const data = await res.json();
+    if (!res.ok) {
+    throw new Error(data.message || "Weather API request failed");
+}
+    const sunData = await getSunAndUVDetails(lat, lon);
      //filter the forecast to get only one forecast per day
   const uniqueForecastDays = [];
   const fiveDaysForecast = data.list.filter((forecast) => {
@@ -294,7 +302,7 @@ const getWeatherDetails = async (cityName, lat, lon) => {
     if(index === 0) {
          currentWeatherDiv.insertAdjacentHTML(
           "beforeend",
-          await createWeatherCard(cityName, weatherItem, index));
+          await createWeatherCard(cityName, weatherItem, index,));
     }
     else {
         weatherCardsDiv.insertAdjacentHTML(
@@ -303,12 +311,17 @@ const getWeatherDetails = async (cityName, lat, lon) => {
     } 
   }
   
-    currentWeatherDetails.insertAdjacentHTML("beforeend", 
-    createWeatherHighlights(fiveDaysForecast[0]));
+    if (sunData && fiveDaysForecast.length > 0) {
+    currentWeatherDetails.insertAdjacentHTML(
+        "beforeend",
+        createWeatherHighlights(fiveDaysForecast[0], sunData)
+    );
+  }
 
 } catch(error) {
-      alert("An error occured while fetching the weather forecast!");
-    };
+    console.error("Weather forecast error:", error);
+    alert("An error occurred while fetching the weather forecast!");
+  }
 };
 
 const getCityCoordinates = async () => {
@@ -316,7 +329,7 @@ const getCityCoordinates = async () => {
   if (!cityName) {
     return;
   }
-  const GEOCODING_API_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`;
+  const GEOCODING_API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`;
 
   try {
     const res = await fetch(GEOCODING_API_URL);
