@@ -25,21 +25,36 @@ const createWeatherCard = async (cityName, weatherItem, index) => {
       }
           let img = null;
           let weather = null;
+          let weatherDescription = null;
+          let weatherDescriptionRU = null;
+          let weatherDescriptionRD = null;
           if (weatherItem.weather[0].main === "Rain") {
             img = "rainyB";
             weather = "Rainy";
+            weatherDescription = "A little rain. A perfect excuse to slow down."; 
+            weatherDescriptionRU = "There's beauty in slowing down.";
+            weatherDescriptionRD = "A rainy day is like a lovely gift -- you can sleep late and not feel guilty.";
           }
           if (weatherItem.weather[0].main === "Clear") {
             img = "sunnyB";
             weather = "Sunny";
+            weatherDescription = "A whole lot of sunshine.";
+            weatherDescriptionRU = "Golden skies. Brighter days ahead.";
+            weatherDescriptionRD = "A lot of sun so a little bit of SPF and umberlla could come in handy";
           }
           if (weatherItem.weather[0].main === "Clouds") {
             if (weatherItem.weather[0].description === "few clouds") {
               img = "sunny-cloudyB";
               weather = "Mostly sunny";
+              weatherDescription = "A little coastal breeze. A lot to look forward to.";
+              weatherDescriptionRU = "A good day to get outside";
+              weatherDescriptionRD = "clear skies through the afternoon, with a cooler breeze arriving after 5 PM.";
             } else {
               img = "CloudB";
               weather = "Cloudy";
+              weatherDescription = "A little cloud cover. A moment to breathe.";
+              weatherDescriptionRU = "A quieter sky. A calmer kind of mood.";
+              weatherDescriptionRD = "The sky and the sun are always there. Its the clouds that come and go.";
             }
           }
           return `<div class="sec1-wrapper">
@@ -70,7 +85,7 @@ const createWeatherCard = async (cityName, weatherItem, index) => {
                     <img src="./img/${img}.png">
                     <div class="space">
                       <h3>${weather}</h3>
-                      <p>A little coastal breeze. A lot to look forward to.</p>
+                      <p>${weatherDescription}</p>
                     </div> 
                   </div>
                 </div>
@@ -88,8 +103,8 @@ const createWeatherCard = async (cityName, weatherItem, index) => {
                     <p class="fix">THE DAY AHEAD</p>
                   </div>
                   <div class="btm">
-                    <h3>A good day to get outside</h3>
-                    <p>clear skies through the afternoon, with a cooler breeze arriving after 5 PM.</p>
+                    <h3>${weatherDescriptionRU}</h3>
+                    <p>${weatherDescriptionRD}</p>
                   </div>
                 </div>
               </div>
@@ -184,3 +199,4 @@ const getCityCoordinates = async () => {
 };
 
 searchButton.addEventListener("click", getCityCoordinates);
+cityInput.addEventListener("keyup", e => e.key === "Enter" && getCityCoordinates());
