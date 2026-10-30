@@ -1,15 +1,74 @@
 const searchButton = document.querySelector(".searchButton-icon");
 const cityInput = document.querySelector(".search-input");
 const currentWeatherDiv = document.querySelector(".sec1-wrapper");
+const currentWeatherDetails = document.querySelector(".sec3");
 const weatherCardsDiv = document.querySelector(".forecast");
 
 const API_KEY = "3b083e17996afb741c42ac6fde0e9bb9"; // API KEY for openweather API
+
+
+const getSunAndUVDetails = async (lat, lon) => {
+
+    const API_URL = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=uv_index&daily=uv_index_max,sunrise,sunset&timezone=auto`;
+
+    try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+
+        if (!res.ok) {
+            throw new Error(data.reason || "Unable to fetch UV details");
+        }
+
+        // Current UV index
+        const uvIndex = data.current.uv_index;
+
+        // Today's sunrise and sunset
+        const sunrise = data.daily.sunrise[0];
+        const sunset = data.daily.sunset[0];
+
+        console.log("UV Index:", uvIndex);
+        console.log("Sunrise:", sunrise);
+        console.log("Sunset:", sunset);
+
+        return {
+            uvIndex,
+            sunrise,
+            sunset,
+            maxUV: data.daily.uv_index_max[0]
+        };
+
+    } catch (error) {
+        console.error("UV and Sun API error:", error);
+        return null;
+    }
+};
 
 const createWeatherCard = async (cityName, weatherItem, index) => {
     let location = {};
     const countryNames = new Intl.DisplayNames(["en"], {
     type: "region"
     });// this displays the full name of the country
+    const getUVCategory = (uvIndex) => {
+
+    if (uvIndex <= 2) {
+        return "Low";
+    } 
+    
+    if (uvIndex <= 5) {
+        return "Moderate";
+    } 
+    
+    if (uvIndex <= 7) {
+        return "High";
+    } 
+    
+    if (uvIndex <= 10) {
+        return "Very High";
+    }
+    return "Extreme";
+  };
+
+  console.log(getUVCategory(4)); 
     if (index === 0) {
     const PLACE_API_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${API_KEY}`;
 
@@ -57,7 +116,9 @@ const createWeatherCard = async (cityName, weatherItem, index) => {
               weatherDescriptionRD = "The sky and the sun are always there. Its the clouds that come and go.";
             }
           }
-          return `<div class="sec1-wrapper">
+          return `
+          <div class="sec1">
+          <div class="sec1-wrapper">
             <div class="data">
               <div class="place">
                 <p><i class="fa-solid fa-location-dot"></i>${location.state}, ${countryNames.of(location.country)}</p>
@@ -109,8 +170,9 @@ const createWeatherCard = async (cityName, weatherItem, index) => {
                 </div>
               </div>
             </div>
-          </div>`;
-        
+          </div>
+          </div>
+          `;   
     }
     else
     {
@@ -142,6 +204,71 @@ const createWeatherCard = async (cityName, weatherItem, index) => {
     }
 };
 
+const createWeatherHighlights = (weatherItem) => {
+  return ` <div class="sec3">
+        <h1>Today's highlights</h1>
+        <div class="sec3-wrapper">
+          <div class="top-left s3">
+            <div class="s3-1">
+              <img src="./img/s-wind.png" alt="wind-img">
+              <p>Wind</p>
+            </div>
+            <div class="s3-2">
+              <h2>${weatherItem.wind.speed}</h2>
+              <p>km/h</p>
+            </div>
+            <div class="tl">
+              <img src="./img/arrow-up-right.png" alt="arrow">
+              <p>Breeze</p>
+            </div>
+            <p>${weatherItem.wind.deg}&deg; . Gists up to ${weatherItem.wind.gust} km/h</p>
+          </div>
+          <div class="top-right s3">
+            <div class="s3-1">
+              <img src="./img/s-droplets.png" alt="droplet-img">
+             <p>Humidity</p>
+            </div>
+            <div class="s3-2">
+              <h2>${weatherItem.main.humidity}</h2>
+              <p>&percnt;</p>
+            </div>
+            <img src="./img/Humidity gauge.png" alt="humidity gauge" id="tr">
+            <p>Comfortable . Dew point 12&deg;C</p>
+          </div>
+          <div class="bottom-left s3">
+            <div class="s3-1">
+              <img src="./img/s-sun.png" alt="sun-img">
+             <p>UV index</p>
+            </div>
+            <div class="s3-2">
+              <h2>${uvIndex}</h2>
+              <p>${getUVCategory(uvIndex)}</p>
+            </div>
+            <img src="./img/UV scale.png" alt="uv scale" class="bl">
+            <p class="bl">A little SPF goes a long way today.</p>
+          </div>
+          <div class="bottom-right s3">
+            <div class="s3-1">
+              <img src="./img/s-sunrise.png" alt="sunrise-img">
+             <p>Sunrise & sunset</p>
+            </div>
+            <img src="./img/Sun path.png" alt="sunrise">
+            <div class="br">
+              <div>
+                <p>7:20 AM</p>
+                <p>Sunrise</p>
+              </div>
+              <div>
+                <p>6:29 PM</p>
+                <p>Sunset</p>
+              </div>
+            </div>
+            <p>11 hours, 9 minutes of daylight</p>
+          </div>
+        </div>
+       </div>`;
+};
+
 const getWeatherDetails = async (cityName, lat, lon) => {
   const WEATHER_API_URL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
 
@@ -160,9 +287,10 @@ const getWeatherDetails = async (cityName, lat, lon) => {
   cityInput.value = "";
   weatherCardsDiv.innerHTML = "";
   currentWeatherDiv.innerHTML = "";
+  currentWeatherDetails.innerHTML = "";
 
   console.log(fiveDaysForecast);
-  fiveDaysForecast.forEach(async (weatherItem, index) => {
+  for (const [index, weatherItem] of fiveDaysForecast.entries()) {
     if(index === 0) {
          currentWeatherDiv.insertAdjacentHTML(
           "beforeend",
@@ -173,8 +301,12 @@ const getWeatherDetails = async (cityName, lat, lon) => {
           "beforeend",
           await createWeatherCard(cityName, weatherItem, index));
     } 
-  });
-  } catch(error) {
+  }
+  
+    currentWeatherDetails.insertAdjacentHTML("beforeend", 
+    createWeatherHighlights(fiveDaysForecast[0]));
+
+} catch(error) {
       alert("An error occured while fetching the weather forecast!");
     };
 };
